@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-} from '@ionic/angular/standalone';
+import { IonButton } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 interface raza {
@@ -16,11 +11,19 @@ interface raza {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [IonButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {
   constructor() {}
+
+  colorPrimario = 'var(--bg-p)';
+  colorSecundario = 'var(--bg-s)';
+  colorActual = this.colorPrimario;
+
+  // [Tarea]: Agregar información de minimo 3 slides para mostrar en la vista. ✅
+  // [Tarea]: Cambiar mediante el click de un boton el tema (color)  de los slides. 
+  
   perros: raza[] = [
     {
       title: 'Pastor Alemán',
@@ -100,4 +103,8 @@ export class HomePage {
         'Hablar del doberman precio es hablar de una de las razas más admiradas por su elegancia, agilidad y carácter protector. El dóberman no solo es un excelente guardián, sino también un compañero leal e inteligente, ideal para personas activas que buscan un perro fuerte y obediente.',
     },
   ];
+
+  CambiarColor() {
+    this.colorActual = this.colorActual === this.colorPrimario ? this.colorSecundario : this.colorPrimario;
+  }
 }
