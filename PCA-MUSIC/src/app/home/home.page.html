@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Blank </ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="CambiarModo()" class="btn-mode" [color]="btnMode">
+        <ion-icon slot="icon-only" [name]="modeIcon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Icon Buttons</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,6 +16,7 @@
     loop="true"
     slides-per-view="1"
     navigation="true"
+    [ngClass]="mode"
   >
     @for (raza of perros; track $index) {
     <swiper-slide>

@@ -1,5 +1,8 @@
+.btn-mode {
+  margin-right: var(--spacing) !important;
+}
 .slider {
-  // height: 100vh;
+  position: relative;
 
   .slide-content {
     max-width: 600px;
@@ -44,4 +47,14 @@
       }
     }
   }
+}
+
+.slide-light {
+  background-color: var(--bg-l);
+  color: var(--bg-p);
+}
+
+.btn-light {
+  background-color: var(--bg-d);
+  color: var(--bg-l);
 }

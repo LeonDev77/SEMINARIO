@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { IonButton } from '@ionic/angular/standalone';
+import { IonButton, IonIcon } from '@ionic/angular/standalone';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { NgClass } from '@angular/common';
+import { addIcons } from 'ionicons';
+import { moon, sunny } from 'ionicons/icons';
 interface raza {
   title: string;
   image: string;
@@ -11,19 +13,27 @@ interface raza {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonButton],
+  imports: [NgClass, IonButton, IonIcon],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage {
-  constructor() {}
-
+  constructor() {
+    addIcons({ moon, sunny });
+  }
   colorPrimario = 'var(--bg-p)';
   colorSecundario = 'var(--bg-s)';
-  colorActual = this.colorPrimario;
-
+  colorActual: string = this.colorPrimario;
+  light: string = 'slide-light';
+  mode = '';
+  iLight: string = 'sunny';
+  iDark: string = 'moon';
+  modeIcon: string = this.iLight;
+  btnLight: string = 'light';
+  btnDark: string = 'dark';
+  btnMode: string = this.btnDark;
   // [Tarea]: Agregar información de minimo 3 slides para mostrar en la vista. ✅
-  // [Tarea]: Cambiar mediante el click de un boton el tema (color)  de los slides. 
-  
+  // [Tarea]: Cambiar mediante el click de un boton el tema (color)  de los slides. ✅
+
   perros: raza[] = [
     {
       title: 'Pastor Alemán',
@@ -105,6 +115,14 @@ export class HomePage {
   ];
 
   CambiarColor() {
-    this.colorActual = this.colorActual === this.colorPrimario ? this.colorSecundario : this.colorPrimario;
+    this.colorActual =
+      this.colorActual === this.colorPrimario
+        ? this.colorSecundario
+        : this.colorPrimario;
+  }
+  CambiarModo() {
+    this.mode = this.mode === this.light ? '' : this.light;
+    this.modeIcon = this.modeIcon === this.iDark ? this.iLight : this.iDark;
+    // this.btnMode = this.btnMode === this.btnDark ? this.btnLight : this.btnDark;
   }
 }
