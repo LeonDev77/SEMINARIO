@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { IonButton, IonIcon } from '@ionic/angular/standalone';
+import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { addIcons } from 'ionicons';
 import { moon, sunny } from 'ionicons/icons';
+import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
+
 interface raza {
   title: string;
   image: string;
@@ -13,16 +16,21 @@ interface raza {
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [NgClass, IonButton, IonIcon],
+  imports: [NgClass, IonicModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class HomePage {
-  constructor() {
+export class HomePage implements OnInit {
+  constructor(private storageService: StorageService, private router: Router) {
     addIcons({ moon, sunny });
   }
-  colorPrimario = 'var(--bg-p)';
-  colorSecundario = 'var(--bg-s)';
-  colorActual: string = this.colorPrimario;
+
+  async ngOnInit() {
+    await this.loadStorageData();
+  }
+
+  colorP: string = 'var(--bg-p)';
+  colorS: string = 'var(--bg-s)';
+  colorActual: string = this.colorP;
   light: string = 'slide-light';
   mode = '';
   iLight: string = 'sunny';
@@ -31,6 +39,7 @@ export class HomePage {
   btnLight: string = 'light';
   btnDark: string = 'dark';
   btnMode: string = this.btnDark;
+
   // [Tarea]: Agregar información de minimo 3 slides para mostrar en la vista. ✅
   // [Tarea]: Cambiar mediante el click de un boton el tema (color)  de los slides. ✅
 
@@ -114,15 +123,31 @@ export class HomePage {
     },
   ];
 
-  CambiarColor() {
+  async CambiarColor() {
     this.colorActual =
-      this.colorActual === this.colorPrimario
-        ? this.colorSecundario
-        : this.colorPrimario;
+      this.colorActual === this.colorP ? this.colorS : this.colorP;
+    await this.storageService.set('theme', this.colorActual);
+    console.log('Tema guardado: ', this.colorActual);
   }
+
   CambiarModo() {
     this.mode = this.mode === this.light ? '' : this.light;
     this.modeIcon = this.modeIcon === this.iDark ? this.iLight : this.iDark;
     // this.btnMode = this.btnMode === this.btnDark ? this.btnLight : this.btnDark;
+  }
+
+  async loadStorageData() {
+    const savedTheme: string = await this.storageService.get('theme');
+    if (savedTheme) {
+      this.colorActual = savedTheme;
+    }
+  }
+
+  async goToIntro() {
+    const isView: boolean = await this.storageService.get('intro');
+    if (isView) {
+      await this.storageService.remove('intro');
+    }
+    this.router.navigate(['/intro']);
   }
 }

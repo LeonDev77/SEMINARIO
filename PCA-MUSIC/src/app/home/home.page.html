@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="secondary">
+      <ion-button (click)="goToIntro()">Intro</ion-button>
       <ion-button (click)="CambiarModo()" class="btn-mode" [color]="btnMode">
         <ion-icon slot="icon-only" [name]="modeIcon"></ion-icon>
       </ion-button>
@@ -42,4 +43,14 @@
     </ion-card-content>
   </ion-card>
   <ion-button fill="outline" (click)="CambiarColor()">Cambiar Fondo</ion-button>
+
+  <div class="demo-ionic-storage">
+    <h3>Demo Ionic Storage</h3>
+    <div [style.backgroud-color]="colorActual">
+      <p>Tema actual: {{colorActual === colorP ? 'Oscuro':'Claro'}}</p>
+    </div>
+  </div>
+  <div>
+    <ion-button (click)="CambiarColor()">Cambiar tema y guardar</ion-button>
+  </div>
 </ion-content>
