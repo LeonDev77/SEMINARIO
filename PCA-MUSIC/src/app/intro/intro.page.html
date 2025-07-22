@@ -1,11 +1,9 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Intro</ion-title>
-    <ion-buttons slot="secondary" class="toolbar-buttons">
-      <ion-button (click)="goToHome()">Home</ion-button>
-    </ion-buttons>
+    
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content [fullscreen]="true">
   <swiper-container
@@ -13,15 +11,20 @@
     loop="true"
     slides-per-view="1"
     navigation="true"
-
   >
-    @for (instrumento of instrumentos; track $index) {
+    @for (intro of intros; track $index) {
     <swiper-slide>
       <div class="slide-content">
-        <img [src]="instrumento.image" [alt]="instrumento.name" />
+        <img [src]="intro.image" [alt]="intro.name" />
         <div class="info">
-          <h2>{{instrumento.name}}</h2>
-          <p>{{instrumento.desc}}</p>
+          <h2>{{intro.name}}</h2>
+          <p>{{intro.desc}}</p>
+          @if ($index === intros.length - 1) {
+          <ion-button (click)="goToHome()" class="ion-text-capitalize">
+            Go To Home
+            <ion-icon slot="end" name="home"></ion-icon>
+          </ion-button>
+          }
         </div>
       </div>
     </swiper-slide>

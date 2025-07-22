@@ -1,30 +1,33 @@
-.toolbar-buttons {
-    margin-right: 20px;
-}
+
 .slider {
+  position: relative;
+
   .slide-content {
-    position: relative;
+    // height: calc(100vh - 56px);
+    height: 100vh;
+    max-width: 800px;
     width: 100%;
+    margin: auto;
     display: grid;
+    grid-template-areas: "image info";
+    gap: var(--spacing);
     place-items: center;
 
     img {
-      //   grid-area: image;
-      width: 100%;
-      height: calc(100vh - 56px);
+      grid-area: image;
+      width: 400px;
+      max-height: 500px;
     }
     .info {
-      position: absolute;
-      width: 100%;
-      z-index: 2;
-      text-align: center;
-      background-color: var(--bg-transparent);
-      padding: var(--spacing) 0 2rem;
-    //   border-radius: var(--radius);
+      max-width: 400px;
+      grid-area: info;
+      position: relative;
+      bottom: 40px;
+      h2 {
+        margin-bottom: 12px;
+      }
 
       p {
-        max-width: 500px;
-        margin: auto;
         font-size: 1.2rem;
       }
     }
@@ -41,8 +44,8 @@
         "info";
 
       img {
-        // width: 95%;
-        height: 615px;
+        // height: 615px;
+        object-fit: cover;
       }
     }
   }

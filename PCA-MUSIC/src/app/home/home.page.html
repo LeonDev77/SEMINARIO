@@ -1,56 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="secondary">
+    <ion-buttons slot="secondary" class="ion-margin-end">
       <ion-button (click)="goToIntro()">Intro</ion-button>
-      <ion-button (click)="CambiarModo()" class="btn-mode" [color]="btnMode">
-        <ion-icon slot="icon-only" [name]="modeIcon"></ion-icon>
+      <ion-button (click)="CambiarModo()" class="ion-margin-end" [color]="btnM">
+        <ion-icon slot="icon-only" [name]="iconM"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>Icon Buttons</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [color]="colorM">
   <swiper-container
     class="slider"
     pagination="true"
     loop="true"
     slides-per-view="1"
     navigation="true"
-    [ngClass]="mode"
+    [ngClass]="colorM"
   >
-    @for (raza of perros; track $index) {
+    @for (cantante of cantantes; track $index) {
     <swiper-slide>
       <div class="slide-content">
-        <img [src]="raza.image" [alt]="raza.title" />
+        <img [src]="cantante.image" [alt]="cantante.name" />
         <div class="info">
-          <h2>{{raza.title}}</h2>
-          <p>{{raza.description}}</p>
+          <h2>{{cantante.name}}</h2>
+          <p>{{cantante.desc}}</p>
         </div>
       </div>
     </swiper-slide>
     }
   </swiper-container>
-  <ion-card [style.background-color]="colorActual">
-    <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-    </ion-card-header>
-
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more,
-      nothing less.
-    </ion-card-content>
-  </ion-card>
-  <ion-button fill="outline" (click)="CambiarColor()">Cambiar Fondo</ion-button>
-
-  <div class="demo-ionic-storage">
-    <h3>Demo Ionic Storage</h3>
-    <div [style.backgroud-color]="colorActual">
-      <p>Tema actual: {{colorActual === colorP ? 'Oscuro':'Claro'}}</p>
-    </div>
-  </div>
-  <div>
-    <ion-button (click)="CambiarColor()">Cambiar tema y guardar</ion-button>
+  <!-- <ion-button (click)="removeStorage()">remove</ion-button> -->
+  <div class="grid-content">
+    <ion-card [color]="cardM" class="grid-item-1 grid-items">1</ion-card>
+    <ion-card [color]="cardM" class="grid-item-2 grid-items">2</ion-card>
+    <ion-card [color]="cardM" class="grid-item-3 grid-items">3</ion-card>
+    <ion-card [color]="cardM" class="grid-item-4 grid-items">4</ion-card>
+    <ion-card [color]="cardM" class="grid-item-5 grid-items">5</ion-card>
+    <ion-card [color]="cardM" class="grid-item-6 grid-items">6</ion-card>
   </div>
 </ion-content>

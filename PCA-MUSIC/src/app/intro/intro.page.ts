@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { StorageService } from '../services/storage.service';
-import { instrumentos } from '../models/instrumentos.model';
+import { sliderBasic } from '../models/sliderBasic.model';
+import { addIcons } from 'ionicons';
+import { home } from 'ionicons/icons';
 
 @Component({
   selector: 'app-intro',
@@ -15,29 +17,33 @@ import { instrumentos } from '../models/instrumentos.model';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class IntroPage implements OnInit {
-  constructor(private router: Router, private storageService: StorageService) {}
+  constructor(private router: Router, private storageService: StorageService) {
+    addIcons({ home });
+  }
 
   async ngOnInit() {}
 
   isView: boolean = false;
-  instrumentos: instrumentos[] = [
+  intros: sliderBasic[] = [
     {
-      name: 'Guitarra Acustica',
-      image:
-        'https://i.pinimg.com/1200x/b9/77/38/b97738f984d989a202317c66f02b2027.jpg',
-      desc: 'Instrumento de cuerda pulsada con caja de resonancia y seis cuerdas. Se toca con dedos o púa, ideal para acompañamiento y solos. Versátil en géneros como folk, pop y flamenco. Portátil y con sonido cálido, suele usarse en música tradicional y contemporánea.',
+      name: 'Guitarra digital',
+      image: '../../assets/ilustracion-1.png',
+      desc: 'La música trasciende pantallas. Esta ilustración muestra cómo la tecnología y el arte convergen, conectando mundos reales y virtuales a través de una guitarra y notas flotantes.',
     },
     {
-      name: 'Violin',
-      image:
-        'https://i.pinimg.com/736x/67/1f/c2/671fc2ad76f36a2b22c7c18648df5114.jpg',
-      desc: 'Pequeño instrumento de cuerda frotada con cuatro cuerdas y sonido agudo. Se toca con arco o pizzicato. Esencial en orquestas, música clásica y folk. Requiere precisión en la afinación y técnica, pero ofrece gran expresividad melódica.',
+      name: 'Arpista en calma',
+      image: '../../assets/ilustracion-2.png',
+      desc: 'Una figura colorida toca un arpa con serenidad. La postura relajada y los tonos vivos transmiten armonía, creatividad y concentración en medio de un entorno imaginario.',
     },
     {
-      name: 'Piano',
-      image:
-        'https://i.pinimg.com/736x/df/70/df/df70dfd7d2828f43d560a6b73faf4c59.jpg',
-      desc: 'Instrumento de tecla y percusión con 88 notas. Produce sonido al golpear cuerdas con martillos. Versátil en clásica, jazz y pop. Permite melodías y acordes simultáneos, siendo fundamental como solista o acompañante. Acústico o digital, es clave en la formación musical.',
+      name: 'Melodía de colores',
+      image: '../../assets/ilustracion-3.png',
+      desc: 'Un pianista sin rostro toca un piano multicolor. La imagen evoca alegría, creatividad y expresión a través de la música, con una estética lúdica y vibrante.',
+    },
+    {
+      name: 'Ritmo en movimiento',
+      image: '../../assets/ilustracion-4.png',
+      desc: 'Un violinista se curva con intensidad mientras interpreta su pieza. El cuerpo se funde con la música, mostrando pasión, energía y la fuerza expresiva del violín.',
     },
   ];
 
