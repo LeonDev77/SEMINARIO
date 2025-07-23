@@ -1,12 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="secondary" class="ion-margin-end">
-      <ion-button (click)="goToIntro()">Intro</ion-button>
-      <ion-button (click)="CambiarModo()" class="ion-margin-end" [color]="btnM">
-        <ion-icon slot="icon-only" [name]="iconM"></ion-icon>
-      </ion-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Icon Buttons</ion-title>
+
+    <ion-title>{{userLogged}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

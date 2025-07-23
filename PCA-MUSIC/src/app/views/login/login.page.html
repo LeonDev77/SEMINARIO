@@ -1,0 +1,66 @@
+<ion-content>
+  <!-- <figure>
+    <img
+      src="https://i.pinimg.com/1200x/2c/d6/7e/2cd67e12e993004dad84f8ddfb3c2fd6.jpg"
+      alt="login image"
+      width="400px"
+    />
+  </figure> -->
+  <div class="content-login">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login(loginForm.value)"
+      class="login-form"
+    >
+      <h2 class="login-title">Iniciar Sesión</h2>
+      <hr class="divider-item" />
+
+      <ion-input
+        class="inputs"
+        label="Email"
+        labelPlacement="floating"
+        placeholder="Ingrese su email"
+        type="email"
+        formControlName="email"
+        fill="outline"
+        required
+      ></ion-input>
+
+      <ion-input
+        class="inputs"
+        label="Password"
+        labelPlacement="stacked"
+        placeholder="Ingrese su contraseña"
+        type="password"
+        formControlName="password"
+        fill="outline"
+        required
+      >
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+
+      <ion-button
+        class="btn-login"
+        color="primary"
+        type="submit"
+        [disabled]="loginForm.invalid"
+        expand="block"
+      >
+        Login
+      </ion-button>
+      <p class="ion-text-center">
+        <a class="btn-recovery-password">¿Olvidaste tu contraseña?</a>
+      </p>
+      <hr class="divider-item divider-2" />
+
+      <ion-button
+        class="btn-register ion-text-capitalize"
+        color="success"
+        expand="block"
+        (click)="goToRegister()"
+      >
+        Registrarse
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

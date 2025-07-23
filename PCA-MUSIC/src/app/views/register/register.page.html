@@ -1,0 +1,89 @@
+<ion-content>
+  <!-- <figure>
+    <img
+      src="https://i.pinimg.com/1200x/2c/d6/7e/2cd67e12e993004dad84f8ddfb3c2fd6.jpg"
+      alt="register image"
+      width="400px"
+    />
+  </figure> -->
+  <div class="content-register">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="register(registerForm.value)"
+      class="register-form"
+    >
+      <h2 class="register-title">Registrarse</h2>
+      <hr class="divider-item" />
+      <div class="inputs-content">
+        <!-- Nombre del usuario -->
+        <ion-input
+          class="inputs"
+          label="Nombre"
+          labelPlacement="floating"
+          placeholder="Ingrese su nombre"
+          type="text"
+          formControlName="name"
+          fill="outline"
+          required
+        ></ion-input>
+
+        <!-- Apellido del usuario -->
+        <ion-input
+          class="inputs"
+          label="Apellido"
+          labelPlacement="floating"
+          placeholder="Ingrese su apellido"
+          type="text"
+          formControlName="lastName"
+          fill="outline"
+          required
+        ></ion-input>
+
+        <!-- Email del usuario -->
+        <ion-input
+          class="inputs"
+          label="Email"
+          labelPlacement="floating"
+          placeholder="Ingrese su correo"
+          type="email"
+          formControlName="email"
+          fill="outline"
+          required
+        ></ion-input>
+
+        <!-- contraseña del usuario -->
+        <ion-input
+          class="inputs"
+          label="Contraseña"
+          labelPlacement="stacked"
+          placeholder="Ingrese una contraseña"
+          type="password"
+          formControlName="password"
+          fill="outline"
+          required
+        >
+          <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+        </ion-input>
+      </div>
+      <ion-button
+        class="btn-register"
+        color="primary"
+        type="submit"
+        [disabled]="registerForm.invalid"
+        expand="block"
+      >
+        Confirmar
+      </ion-button>
+      <hr class="divider-item divider-2" />
+      <p class="ion-text-center">¿Ya tienes una cuenta?</p>
+      <ion-button
+        class="btn-register ion-text-capitalize"
+        color="success"
+        expand="block"
+        (click)="goToLogin()"
+      >
+        Iniciar Sesión
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

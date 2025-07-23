@@ -92,4 +92,14 @@
       }
     }
   }
+
+  .grid-content {
+    grid-template-areas:
+      "one"
+      "two"
+      "three"
+      "four"
+      "five"
+      "six";
+  }
 }

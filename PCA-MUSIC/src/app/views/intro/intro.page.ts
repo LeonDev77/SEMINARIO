@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { StorageService } from '../services/storage.service';
-import { sliderBasic } from '../models/sliderBasic.model';
+import { StorageService } from '../../services/storage.service';
+import { sliderBasic } from '../../models/sliderBasic.model';
 import { addIcons } from 'ionicons';
 import { home } from 'ionicons/icons';
 
@@ -27,22 +27,22 @@ export class IntroPage implements OnInit {
   intros: sliderBasic[] = [
     {
       name: 'Guitarra digital',
-      image: '../../assets/ilustracion-1.png',
+      image: 'assets/ilustracion-1.png',
       desc: 'La música trasciende pantallas. Esta ilustración muestra cómo la tecnología y el arte convergen, conectando mundos reales y virtuales a través de una guitarra y notas flotantes.',
     },
     {
       name: 'Arpista en calma',
-      image: '../../assets/ilustracion-2.png',
+      image: 'assets/ilustracion-2.png',
       desc: 'Una figura colorida toca un arpa con serenidad. La postura relajada y los tonos vivos transmiten armonía, creatividad y concentración en medio de un entorno imaginario.',
     },
     {
       name: 'Melodía de colores',
-      image: '../../assets/ilustracion-3.png',
+      image: 'assets/ilustracion-3.png',
       desc: 'Un pianista sin rostro toca un piano multicolor. La imagen evoca alegría, creatividad y expresión a través de la música, con una estética lúdica y vibrante.',
     },
     {
       name: 'Ritmo en movimiento',
-      image: '../../assets/ilustracion-4.png',
+      image: 'assets/ilustracion-4.png',
       desc: 'Un violinista se curva con intensidad mientras interpreta su pieza. El cuerpo se funde con la música, mostrando pasión, energía y la fuerza expresiva del violín.',
     },
   ];
@@ -53,6 +53,6 @@ export class IntroPage implements OnInit {
       await this.storageService.set('intro', this.isView);
       console.log('Intro Vista');
     }
-    this.router.navigate(['/home']);
+    this.router.navigate(['menu/home']);
   }
 }
