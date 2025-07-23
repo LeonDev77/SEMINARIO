@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
 import { Router } from '@angular/router';
-import { exitOutline } from 'ionicons/icons';
+import * as allIcons from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { MenuController } from '@ionic/angular';
 // import { IonSplitPane } from '@ionic/angular/standalone';
 
 @Component({
@@ -16,8 +17,12 @@ import { addIcons } from 'ionicons';
   imports: [IonicModule, CommonModule, FormsModule],
 })
 export class MenuPage implements OnInit {
-  constructor(private storageService: StorageService, private router: Router) {
-    addIcons({ exitOutline });
+  constructor(
+    private storageService: StorageService,
+    private router: Router,
+    private menuCtrl: MenuController
+  ) {
+    addIcons(allIcons);
   }
 
   ngOnInit() {}
@@ -38,4 +43,9 @@ export class MenuPage implements OnInit {
     }
     this.router.navigate(['/login']);
   }
+
+  // closeMenu() {
+  //   this.menuCtrl.close();
+  //   console.log('Si funciona');
+  // }
 }
