@@ -1,30 +1,42 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
-import { userData, userLogin } from '../models/user.model';
+import { response, userData, userLogin } from '../models/user.model';
+import { urlServer } from '../settings/appsetting';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(private storageService: StorageService) {}
-  isLogged: boolean = false;
-  async loginUser(credentials: userLogin) {
-    const userData: userData = await this.storageService.get('userData');
-    return new Promise((accept, reject) => {
-      if (
-        credentials.email === userData.email &&
-        credentials.password === userData.password
-      ) {
-        accept('Login correcto');
-        this.isLogged = true;
-        this.saveLogin();
-      } else reject('Credenciales incorrectas');
-    });
-  }
 
-  async saveLogin() {
-    if (this.isLogged) {
-      await this.storageService.set('login', this.isLogged);
+  async loginUser(credentials: userLogin) {
+    try {
+      const response = await fetch(`${urlServer}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user: {
+            email: credentials.email,
+            password: credentials.password,
+          },
+        }),
+      });
+
+      const data: response = await response.json();
+
+      if (!response.ok) {
+        console.error('Detalles del error:', data);
+        throw new Error(data.msg || 'Error en el login');
+      }
+      if (data.status === 'OK') {
+        await this.storageService.set('loggedIn', data);
+      }
+      return data;
+    } catch (err) {
+      console.error('Error:', err);
+      return err;
     }
   }
 }

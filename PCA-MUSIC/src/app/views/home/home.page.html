@@ -1,44 +1,107 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar [color]="colorM">
     <ion-buttons slot="secondary" class="ion-margin-end">
       <ion-menu-button></ion-menu-button>
-      <!-- <ion-button (click)="''">
-        Click me
-      </ion-button> -->
     </ion-buttons>
-
-    <ion-title>{{userLogged}}</ion-title>
+    @if (userLogged) {
+    <ion-title>Hola, {{userLogged.username}}</ion-title>
+    }
   </ion-toolbar>
 </ion-header>
 
 <ion-content [color]="colorM">
+  <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+    <ion-fab-button (click)="CambiarModo()" [color]="btnM">
+      <ion-icon [name]="iconM"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <swiper-container
     class="slider"
-    pagination="true"
     loop="true"
     slides-per-view="1"
     navigation="true"
     [ngClass]="colorM"
   >
-    @for (cantante of cantantes; track $index) {
-    <swiper-slide>
+    @for (album of albums; track $index) {
+    <swiper-slide (click)="showSongsByAlbum(album.id)">
       <div class="slide-content">
-        <img [src]="cantante.image" [alt]="cantante.name" />
+        <img [src]="album.image" [alt]="album.name" />
         <div class="info">
-          <h2>{{cantante.name}}</h2>
-          <p>{{cantante.desc}}</p>
+          <h2>{{album.name}}</h2>
+          <!-- <p>{{album.desc}}</p>  -->
         </div>
       </div>
     </swiper-slide>
     }
   </swiper-container>
-  <!-- <ion-button (click)="removeStorage()">remove</ion-button> -->
-  <div class="grid-content">
-    <ion-card [color]="cardM" class="grid-item-1 grid-items">1</ion-card>
-    <ion-card [color]="cardM" class="grid-item-2 grid-items">2</ion-card>
-    <ion-card [color]="cardM" class="grid-item-3 grid-items">3</ion-card>
-    <ion-card [color]="cardM" class="grid-item-4 grid-items">4</ion-card>
-    <ion-card [color]="cardM" class="grid-item-5 grid-items">5</ion-card>
-    <ion-card [color]="cardM" class="grid-item-6 grid-items">6</ion-card>
-  </div>
+  <swiper-container
+    class="slider"
+    loop="true"
+    slides-per-view="1"
+    navigation="true"
+    [ngClass]="colorM"
+  >
+    @for (artist of artists; track $index) {
+    <swiper-slide (click)="showSongsByArtist(artist.id)">
+      <div class="slide-content">
+        <img [src]="artist.image" [alt]="artist.name" />
+        <div class="info">
+          <h2>{{artist.name}}</h2>
+          <!-- <p>{{album.desc}}</p>  -->
+        </div>
+      </div>
+    </swiper-slide>
+    }
+  </swiper-container>
 </ion-content>
+<ion-footer>
+  <!-- <ion-toolbar> -->
+  <!-- @if (!song) {
+    <ion-title>Footer</ion-title>
+    } @else {
+    <ion-item>{{song.name}}</ion-item>
+    } -->
+  <!-- </ion-toolbar> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-start">
+        {{formatTime(currentSong?.currentTime) || "0:00"}}
+      </ion-col>
+      <ion-col class="ion-text-end">
+        {{formatTime(getRemainingTime()) || "0:00"}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-progress-bar [value]="newTime" color="primary"></ion-progress-bar>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-start" size="2">
+        @if (isFavorite) {
+        <ion-button fill="clear" (click)="dislike()">
+          <ion-icon color="danger" name="heart"></ion-icon>
+        </ion-button>
+        } @else {
+        <ion-button fill="clear" (click)="like()">
+          <ion-icon color="dark" name="heart-outline"></ion-icon>
+        </ion-button>
+        }
+      </ion-col>
+      <ion-col class="ion-text-center ion-justify-content-center">
+        <ion-text>
+          <h2>{{song.name || "N/A"}}</h2>
+        </ion-text>
+      </ion-col>
+      <ion-col class="ion-text-end" size="2">
+        @if (!song.playing) {
+        <ion-button fill="clear" (click)="play()">
+          <ion-icon color="dark" name="play"></ion-icon>
+        </ion-button>
+        } @else {
+        <ion-button fill="clear" (click)="pause()">
+          <ion-icon color="dark" name="pause"></ion-icon>
+        </ion-button>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

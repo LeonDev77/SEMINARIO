@@ -7,9 +7,12 @@
     height: calc(100vh - 56px);
     margin: auto;
     display: grid;
-    grid-template-areas: "image info";
+    grid-template-areas:
+      "image"
+      "info";
     gap: var(--spacing);
     place-items: center;
+    align-content: center;
 
     img {
       grid-area: image;
@@ -29,52 +32,6 @@
   }
 }
 
-// Grid Section
-.grid-content {
-  margin: 3rem auto;
-  max-width: 950px;
-  padding: var(--spacing);
-  display: grid;
-  gap: var(--spacing-2);
-  grid-template-areas:
-    "one two two"
-    "one three four"
-    "one three four"
-    "one three five"
-    "six six five";
-
-  .grid-items {
-    padding: var(--spacing);
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: var(--radius);
-  }
-
-  .grid-item-1 {
-    grid-area: one;
-  }
-  .grid-item-2 {
-    grid-area: two;
-    height: 200px;
-  }
-  .grid-item-3 {
-    grid-area: three;
-  }
-  .grid-item-4 {
-    grid-area: four;
-    height: 150px;
-  }
-  .grid-item-5 {
-    grid-area: five;
-    height: 300px;
-  }
-  .grid-item-6 {
-    grid-area: six;
-    height: 100px;
-  }
-}
-
 @media (max-width: 660px) {
   .slider {
     .slide-content {
@@ -91,15 +48,5 @@
         width: 100%;
       }
     }
-  }
-
-  .grid-content {
-    grid-template-areas:
-      "one"
-      "two"
-      "three"
-      "four"
-      "five"
-      "six";
   }
 }

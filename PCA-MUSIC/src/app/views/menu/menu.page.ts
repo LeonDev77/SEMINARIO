@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import * as allIcons from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { MenuController } from '@ionic/angular';
+import { response } from 'src/app/models/user.model';
 // import { IonSplitPane } from '@ionic/angular/standalone';
 
 @Component({
@@ -36,9 +37,9 @@ export class MenuPage implements OnInit {
   }
 
   async exit() {
-    const isLogged: boolean = await this.storageService.get('login');
-    if (isLogged) {
-      await this.storageService.remove('login');
+    const isLogged: response = await this.storageService.get('loggedIn');
+    if (isLogged.status === 'OK') {
+      await this.storageService.remove('loggedIn');
       await this.storageService.remove('intro');
     }
     this.router.navigate(['/login']);

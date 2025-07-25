@@ -39,7 +39,7 @@ export class RegisterPage implements OnInit {
           Validators.required, // Campo obligatorio
         ])
       ),
-      lastName: new FormControl(
+      username: new FormControl(
         '',
         Validators.compose([
           Validators.required, // Campo obligatorio
@@ -70,7 +70,7 @@ export class RegisterPage implements OnInit {
     this.registerService
       .addUser(data)
       .then((res) => {
-        this.navCtrl.navigateForward('/login');
+        // this.navCtrl.navigateForward('/login');
       })
       .catch((err) => {
         console.log(err);
