@@ -9,34 +9,37 @@ import { urlServer } from '../settings/appsetting';
 export class AuthService {
   constructor(private storageService: StorageService) {}
 
-  async loginUser(credentials: userLogin) {
-    try {
-      const response = await fetch(`${urlServer}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+  loginUser(credentials: userLogin) {
+    return fetch(`${urlServer}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user: {
+          email: credentials.email,
+          password: credentials.password,
         },
-        body: JSON.stringify({
-          user: {
-            email: credentials.email,
-            password: credentials.password,
-          },
-        }),
+      }),
+    })
+      .then((res) => {
+        return res.json().then((data) => {
+          if (!res.ok) {
+            throw 'Usuario o contraseña incorrectos';
+          }
+
+          if (data.status === 'OK') {
+            this.storageService.set('loggedIn', data);
+            console.log(data);
+            
+          }
+
+          return data;
+        });
+      })
+      .catch((err) => {
+        // Re-lanzamos el error para que llegue al .catch() de login()
+        throw err;
       });
-
-      const data: response = await response.json();
-
-      if (!response.ok) {
-        console.error('Detalles del error:', data);
-        throw new Error(data.msg || 'Error en el login');
-      }
-      if (data.status === 'OK') {
-        await this.storageService.set('loggedIn', data);
-      }
-      return data;
-    } catch (err) {
-      console.error('Error:', err);
-      return err;
-    }
   }
 }

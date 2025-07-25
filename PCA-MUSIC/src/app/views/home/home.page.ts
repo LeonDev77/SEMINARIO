@@ -34,7 +34,6 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     await this.loadAllData();
-    // await this.browseFavoriteSongs();
   }
 
   // Modos de color
@@ -178,7 +177,7 @@ export class HomePage implements OnInit {
   async loadAllFavorites() {
     await this.musicService.getAllFavorites().then((favorites) => {
       this.allFavorites = favorites;
-      console.log(this.allFavorites);
+      // console.log(this.allFavorites);
     });
   }
 

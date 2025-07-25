@@ -81,18 +81,19 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   login(credentials: userLogin) {
-    console.log(credentials);
-    this.authService
-      .loginUser(credentials)
-      .then((res) => {
-        this.errorMessage = '';
-        this.navCtrl.navigateForward('menu/home');
-      })
-      .catch((error) => {
-        this.errorMessage = error;
-        this.alertMessage(this.errorMessage);
-      });
-  }
+  console.log(credentials);
+  this.authService
+    .loginUser(credentials)
+    .then((res) => {
+      this.errorMessage = '';
+      this.navCtrl.navigateForward('menu/home');
+    })
+    .catch((error) => {
+      this.errorMessage = error;
+      this.alertMessage(this.errorMessage);
+    });
+}
+
 
   goToRegister() {
     this.router.navigate(['/register']);
